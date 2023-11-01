@@ -1,10 +1,5 @@
-# WorkshopValidador
-Creacion de una aplicacion validadora y procesadora de archivos, en este caso de tipo xlsx y csv.
-
----
-
-## ACLARACIÓN
-La aplicación se encuentra en la rama entrega_workshop
+# Test-Validador
+Comprende los test que se realizaran al workshop.
 
 ---
 
@@ -23,7 +18,7 @@ y enviar un JSON con el siguiente cuerpo:
 ```
 {
     "path" : "ruta del archivo",
-    "fileType" : "tipo del archivo"
+    "fileType" : ."tipo del archivo"
 }
 ```
 
