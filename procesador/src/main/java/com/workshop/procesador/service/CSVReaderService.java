@@ -53,7 +53,7 @@ public class CSVReaderService implements FileProcessorDTO {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } catch (CsvValidationException e) {
             throw new RuntimeException(e);
         }
