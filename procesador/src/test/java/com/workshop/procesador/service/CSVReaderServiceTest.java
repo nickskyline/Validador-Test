@@ -64,7 +64,7 @@ class CSVReaderServiceTest {
         Mockito.when(feignFileClient.upload(Mockito.any())).thenReturn(true);
         // Simular una IOException al abrir el archivo
         String invalidFilePath = "invalid_file.csv";
-        // Act and Assert
+        // Act y Assert
         assertThrows(RuntimeException.class, () -> {
             this.csvReaderService.fileProcess(invalidFilePath);
         });

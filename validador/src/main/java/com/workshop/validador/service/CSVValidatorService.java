@@ -51,8 +51,8 @@ public class CSVValidatorService implements RecordValidatorDTO {
                 "Insurance account manager",
                 "Educational psychologist"
         };
-        for (String validJobTitle : validJobTitles) {
-            if (jobTitle.equalsIgnoreCase(jobTitle)) {
+        for (String valid : validJobTitles) {
+            if (jobTitle.equalsIgnoreCase(valid)) {
                 return true;
             }
         }

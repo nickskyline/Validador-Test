@@ -19,5 +19,4 @@ public class RecordsValidatorService {
         String[] row = data.getRecords();
         return strategy.validateRecords(row);
     }
-
 }

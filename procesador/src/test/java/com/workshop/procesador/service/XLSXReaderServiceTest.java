@@ -1,4 +1,4 @@
-package com.workshop.procesador;
+package com.workshop.procesador.service;
 
 import com.workshop.procesador.dto.XLSXFileDTO;
 import com.workshop.procesador.feign.FeignFileClient;
@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class XLSXReaderServiceTest {
 
-    @MockBean
+    @Mock
     private FeignFileClient feignFileClient;
 
     private XLSXReaderService xlsxReaderService;
