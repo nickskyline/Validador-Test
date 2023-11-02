@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 public class XLSXReaderServiceTest {
 
-    @Mock
+    @MockBean
     private FeignFileClient feignFileClient;
 
     private XLSXReaderService xlsxReaderService;
