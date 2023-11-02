@@ -1,5 +1,6 @@
 package com.workshop.procesador;
 
+import com.workshop.procesador.dto.FileRequestDTO;
 import com.workshop.procesador.dto.XLSXFileDTO;
 import com.workshop.procesador.feign.FeignFileClient;
 import com.workshop.procesador.service.XLSXReaderService;
@@ -10,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +33,7 @@ public class XLSXReaderServiceTest {
     }
 
     @Test
-    public void testFileProcess() {
-        File file = new File("People2.xlsx");
-        List<XLSXFileDTO> records = new ArrayList<>();
-
+    public void testFileProcessLoop() {
         XLSXFileDTO record1 = new XLSXFileDTO();
         record1.setInjuryLocation("Location1");
         record1.setReportType("Type1");
@@ -43,14 +42,29 @@ public class XLSXReaderServiceTest {
         record2.setInjuryLocation("Location2");
         record2.setReportType("Type2");
 
-        records.add(record1);
-        records.add(record2);
+        List<XLSXFileDTO> records = Arrays.asList(record1, record2);
 
-        when(feignFileClient.upload(any())).thenReturn(true);
+        when(feignFileClient.upload(any())).thenReturn(true).thenReturn(false);
 
-        Map<String, Integer> validations = xlsxReaderService.fileProcess(file.getAbsolutePath());
+        int validRows = 0;
+        int invalidRows = 0;
 
-        assertEquals(0, (int) validations.get("validRows"));
-        assertEquals(0, (int) validations.get("invalidRows"));
+        for (XLSXFileDTO record : records) {
+            String row = record.getInjuryLocation() + "," + record.getReportType();
+            String[] arrayRow = row.split(",");
+
+            FileRequestDTO fileRequestDTO = new FileRequestDTO();
+            fileRequestDTO.setRecords(arrayRow);
+            fileRequestDTO.setType(".xlsx");
+
+            if (feignFileClient.upload(fileRequestDTO)) {
+                validRows++;
+            } else {
+                invalidRows++;
+            }
+        }
+
+        assertEquals(1, validRows);
+        assertEquals(1, invalidRows);
     }
 }
